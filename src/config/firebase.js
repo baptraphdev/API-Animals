@@ -7,7 +7,11 @@ let firebaseApp;
 const initializeFirebase = () => {
   if (!firebaseApp) {
     firebaseApp = admin.initializeApp({
-      projectId: config.firebase.projectId,
+      credential: admin.credential.cert({
+        projectId: config.firebase.projectId,
+        clientEmail: config.firebase.clientEmail,
+        privateKey: config.firebase.privateKey
+      }),
       databaseURL: config.firebase.databaseURL,
       storageBucket: config.firebase.storageBucket
     });
